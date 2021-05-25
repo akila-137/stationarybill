@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	
+	
+	<context:property-placeholder
+		location="classpath:application.properties" />
+
+<bean id="notebook" class="com.cts.stationarybill.vo.Item">
+<property name="itemName" value="Notebook"/>
+<property name="itemCostPerQuantity" value="${notebook.CostPerQuantity}"/>
+<property name="quantity" value="${notebook.quantity}"/>
+</bean>
+
+<bean id="pen" class="com.cts.stationarybill.vo.Item">
+<property name="itemName" value="Pen"/>
+<property name="itemCostPerQuantity" value="${pen.CostPerQuantity}"/>
+<property name="quantity" value="${pen.quantity}"/>
+</bean>
+
+<bean id="pencil" class="com.cts.stationarybill.vo.Item">
+<property name="itemName" value="Pencil"/>
+<property name="itemCostPerQuantity" value="${pencil.CostPerQuantity}"/>
+<property name="quantity" value="${pencil.quantity}"/>
+</bean>
+
+<bean id="myCart" class="com.cts.stationarybill.vo.MyCart">
+<property name="items">
+<list>
+<ref bean="notebook"/>
+<ref bean="pen"/>
+<ref bean="pencil"/>
+</list>
+</property>
+</bean>
+
+<bean id="cartBo" class="com.cts.stationarybill.bo.CartBo">
+<constructor-arg ref="myCart"/>
+</bean>
+<bean id="cartService" class="com.cts.stationarybill.service.CartService">
+<property name="cartBo" ref="cartBo"/>
+</bean>
+
+</beans>
